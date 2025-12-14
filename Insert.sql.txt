@@ -1,0 +1,337 @@
+-- ============================================
+-- USUARIO (26 registros)
+-- ============================================
+INSERT INTO USUARIO (Id_USUARIO, Codigo_usuario, Contrasena_usuario, Rol) VALUES
+('U001', 'tutor01', 'pass_tutor01', 'tutor'),
+('U002', 'tutor02', 'pass_tutor02', 'tutor'),
+('U003', 'tutor03', 'pass_tutor03', 'tutor'),
+('U004', 'tutor04', 'pass_tutor04', 'tutor'),
+('U005', 'tutor05', 'pass_tutor05', 'tutor'),
+
+('U006', 'docente01', 'pass_docente01', 'docente'),
+('U007', 'docente02', 'pass_docente02', 'docente'),
+('U008', 'docente03', 'pass_docente03', 'docente'),
+('U009', 'docente04', 'pass_docente04', 'docente'),
+('U010', 'docente05', 'pass_docente05', 'docente'),
+('U011', 'docente06', 'pass_docente06', 'docente'),
+
+('U012', 'alumno01', 'pass_alumno01', 'alumno'),
+('U013', 'alumno02', 'pass_alumno02', 'alumno'),
+('U014', 'alumno03', 'pass_alumno03', 'alumno'),
+('U015', 'alumno04', 'pass_alumno04', 'alumno'),
+('U016', 'alumno05', 'pass_alumno05', 'alumno'),
+('U017', 'alumno06', 'pass_alumno06', 'alumno'),
+('U018', 'alumno07', 'pass_alumno07', 'alumno'),
+('U019', 'alumno08', 'pass_alumno08', 'alumno'),
+('U020', 'alumno09', 'pass_alumno09', 'alumno'),
+('U021', 'alumno10', 'pass_alumno10', 'alumno'),
+('U022', 'alumno11', 'pass_alumno11', 'alumno'),
+('U023', 'alumno12', 'pass_alumno12', 'alumno'),
+('U024', 'alumno13', 'pass_alumno13', 'alumno'),
+('U025', 'alumno14', 'pass_alumno14', 'alumno'),
+('U026', 'alumno15', 'pass_alumno15', 'alumno');
+
+-- ============================================
+-- APODERADO (10 registros)
+-- ============================================
+INSERT INTO APODERADO (Id_APODERADO, Nombre_apoderado, Telefono, Parentesco) VALUES
+('AP001', 'Juan Pérez',        '987654321', 'Padre'),
+('AP002', 'María López',       '912345678', 'Madre'),
+('AP003', 'Carlos Ramírez',    '923456789', 'Padre'),
+('AP004', 'Lucía Fernández',   '934567890', 'Madre'),
+('AP005', 'Miguel Torres',     '945678901', 'Tío'),
+('AP006', 'Ana Castillo',      '956789012', 'Tía'),
+('AP007', 'Pedro Sánchez',     '967890123', 'Padre'),
+('AP008', 'Rosa Morales',      '978901234', 'Madre'),
+('AP009', 'Luis Herrera',      '989012345', 'Abuelo'),
+('AP010', 'Elena Rojas',       '900123456', 'Abuela');
+
+-- ============================================
+-- TUTOR (5 registros)
+-- ============================================
+INSERT INTO TUTOR (Id_TUTOR, Nombre_tutor, DNI, Fecha_nacimiento, Telefono, Correo_electronico, Id_USUARIO) VALUES
+('TUT001', 'Ricardo Gómez',     '12345678', '1980-03-15', '987111111', 'ricardo.gomez@colegio.com', 'U001'),
+('TUT002', 'Sandra Núñez',      '22345678', '1982-07-20', '987222222', 'sandra.nunez@colegio.com',  'U002'),
+('TUT003', 'Héctor Aguilar',    '32345678', '1979-11-05', '987333333', 'hector.aguilar@colegio.com', 'U003'),
+('TUT004', 'Patricia Campos',   '42345678', '1985-01-10', '987444444', 'patricia.campos@colegio.com','U004'),
+('TUT005', 'Jorge Medina',      '52345678', '1983-09-22', '987555555', 'jorge.medina@colegio.com',  'U005');
+
+-- ============================================
+-- DOCENTE (6 registros)
+-- ============================================
+INSERT INTO DOCENTE (Id_DOCENTE, Nombre_docente, DNI, Fecha_nacimiento, Telefono, Correo_electronico, Id_USUARIO) VALUES
+('DOC001', 'Luis Díaz',         '11112222', '1978-02-10', '981111111', 'luis.diaz@colegio.com',      'U006'),
+('DOC002', 'Marina Paredes',    '22223333', '1980-04-18', '982222222', 'marina.paredes@colegio.com', 'U007'),
+('DOC003', 'Roberto Silva',     '33334444', '1975-06-25', '983333333', 'roberto.silva@colegio.com',  'U008'),
+('DOC004', 'Claudia Rivas',     '44445555', '1982-08-30', '984444444', 'claudia.rivas@colegio.com',  'U009'),
+('DOC005', 'Fernando León',     '55556666', '1979-10-12', '985555555', 'fernando.leon@colegio.com',  'U010'),
+('DOC006', 'Natalia Ruiz',      '66667777', '1984-12-03', '986666666', 'natalia.ruiz@colegio.com',   'U011');
+
+-- ============================================
+-- CICLO (3 registros)
+-- ============================================
+INSERT INTO CICLO (Id_CICLO, Nombre_ciclo, Fecha_inicio, Fecha_fin, Id_TUTOR) VALUES
+('CIC001', 'Ciclo 2025-I',       '2025-03-01', '2025-07-15', 'TUT001'),
+('CIC002', 'Ciclo 2025-II',      '2025-08-01', '2025-12-15', 'TUT002'),
+('CIC003', 'Ciclo Verano 2025',  '2025-01-10', '2025-02-28', 'TUT003');
+
+-- ============================================
+-- CURSO (6 registros)
+-- ============================================
+INSERT INTO CURSO (Id_CURSO, Nombre_curso, Horas_de_clase) VALUES
+('CUR001', 'Matemática',         '6'),
+('CUR002', 'Comunicación',       '4'),
+('CUR003', 'Física',             '4'),
+('CUR004', 'Química',            '4'),
+('CUR005', 'Historia',           '3'),
+('CUR006', 'Inglés',             '3');
+
+-- ============================================
+-- ALUMNO (15 registros)
+-- ============================================
+INSERT INTO ALUMNO (Id_ALUMNO, Nombre_alumno, DNI, Fecha_nacimiento, Telefono, Direccion, Correo_electronico, Nivel_educativo, Id_APODERADO, Id_USUARIO, Id_TUTOR) VALUES
+('ALU001', 'Carlos Vega',         '70112233', '2008-01-15', '991111111', 'Av. Lima 123',     'carlos.vega@correo.com',     'Secundaria', 'AP001', 'U012', 'TUT001'),
+('ALU002', 'Daniela Rojas',       '70112234', '2008-03-20', '991111112', 'Jr. Arequipa 456', 'daniela.rojas@correo.com',   'Secundaria', 'AP001', 'U013', 'TUT001'),
+('ALU003', 'Miguel Castro',       '70112235', '2007-05-10', '991111113', 'Av. Grau 789',     'miguel.castro@correo.com',   'Secundaria', 'AP002', 'U014', 'TUT001'),
+('ALU004', 'Lucero Pineda',       '70112236', '2007-07-22', '991111114', 'Jr. Lampa 135',    'lucero.pineda@correo.com',   'Secundaria', 'AP003', 'U015', 'TUT001'),
+('ALU005', 'Javier Soto',         '70112237', '2008-09-05', '991111115', 'Av. Tacna 246',    'javier.soto@correo.com',     'Secundaria', 'AP003', 'U016', 'TUT001'),
+
+('ALU006', 'Andrea Morales',      '70112238', '2007-02-14', '992222221', 'Av. Brasil 321',   'andrea.morales@correo.com',  'Secundaria', 'AP004', 'U017', 'TUT002'),
+('ALU007', 'Luis Herrera',        '70112239', '2008-06-18', '992222222', 'Jr. Junín 654',    'luis.herrera@correo.com',    'Secundaria', 'AP004', 'U018', 'TUT002'),
+('ALU008', 'Sofía García',        '70112240', '2007-11-09', '992222223', 'Av. Perú 987',     'sofia.garcia@correo.com',    'Secundaria', 'AP005', 'U019', 'TUT002'),
+('ALU009', 'Diego Vargas',        '70112241', '2008-04-27', '992222224', 'Jr. Cusco 741',    'diego.vargas@correo.com',    'Secundaria', 'AP005', 'U020', 'TUT002'),
+('ALU010', 'Mariana Torres',      '70112242', '2007-08-13', '992222225', 'Av. Unión 159',    'mariana.torres@correo.com',  'Secundaria', 'AP006', 'U021', 'TUT002'),
+
+('ALU011', 'Gabriel López',       '70112243', '2006-12-01', '993333331', 'Av. Progreso 369', 'gabriel.lopez@correo.com',   'Preuniversitario', 'AP007', 'U022', 'TUT003'),
+('ALU012', 'Valeria Flores',      '70112244', '2006-10-21', '993333332', 'Jr. San Martín 258','valeria.flores@correo.com', 'Preuniversitario', 'AP007', 'U023', 'TUT003'),
+('ALU013', 'Rodrigo Sánchez',     '70112245', '2006-07-30', '993333333', 'Av. Colonial 741', 'rodrigo.sanchez@correo.com', 'Preuniversitario', 'AP008', 'U024', 'TUT003'),
+('ALU014', 'Camila Ortiz',        '70112246', '2006-03-11', '993333334', 'Jr. Amazonas 963', 'camila.ortiz@correo.com',    'Preuniversitario', 'AP009', 'U025', 'TUT003'),
+('ALU015', 'Matías Aguilar',      '70112247', '2006-05-19', '993333335', 'Av. La Molina 159','matias.aguilar@correo.com',  'Preuniversitario', 'AP010', 'U026', 'TUT003');
+
+-- ============================================
+-- CICLO_CURSO (9 registros)
+-- ============================================
+INSERT INTO CICLO_CURSO (Id_CICLO, Id_CURSO, Id_DOCENTE) VALUES
+('CIC001', 'CUR001', 'DOC001'),
+('CIC001', 'CUR002', 'DOC002'),
+('CIC001', 'CUR003', 'DOC003'),
+
+('CIC002', 'CUR002', 'DOC002'),
+('CIC002', 'CUR004', 'DOC004'),
+('CIC002', 'CUR005', 'DOC005'),
+
+('CIC003', 'CUR001', 'DOC003'),
+('CIC003', 'CUR005', 'DOC005'),
+('CIC003', 'CUR006', 'DOC006');
+
+-- ============================================
+-- ALUMNO_CICLO_CURSO (40 registros aprox.)
+-- ALU001-ALU005 en CIC001 (3 cursos)
+-- ALU006-ALU010 en CIC002 (3 cursos)
+-- ALU011-ALU015 en CIC003 (2 cursos)
+-- ============================================
+INSERT INTO ALUMNO_CICLO_CURSO (Id_ALUMNO, Id_CICLO, Id_CURSO) VALUES
+-- CIC001: CUR001, CUR002, CUR003
+('ALU001', 'CIC001', 'CUR001'),
+('ALU001', 'CIC001', 'CUR002'),
+('ALU001', 'CIC001', 'CUR003'),
+
+('ALU002', 'CIC001', 'CUR001'),
+('ALU002', 'CIC001', 'CUR002'),
+('ALU002', 'CIC001', 'CUR003'),
+
+('ALU003', 'CIC001', 'CUR001'),
+('ALU003', 'CIC001', 'CUR002'),
+('ALU003', 'CIC001', 'CUR003'),
+
+('ALU004', 'CIC001', 'CUR001'),
+('ALU004', 'CIC001', 'CUR002'),
+('ALU004', 'CIC001', 'CUR003'),
+
+('ALU005', 'CIC001', 'CUR001'),
+('ALU005', 'CIC001', 'CUR002'),
+('ALU005', 'CIC001', 'CUR003'),
+
+-- CIC002: CUR002, CUR004, CUR005
+('ALU006', 'CIC002', 'CUR002'),
+('ALU006', 'CIC002', 'CUR004'),
+('ALU006', 'CIC002', 'CUR005'),
+
+('ALU007', 'CIC002', 'CUR002'),
+('ALU007', 'CIC002', 'CUR004'),
+('ALU007', 'CIC002', 'CUR005'),
+
+('ALU008', 'CIC002', 'CUR002'),
+('ALU008', 'CIC002', 'CUR004'),
+('ALU008', 'CIC002', 'CUR005'),
+
+('ALU009', 'CIC002', 'CUR002'),
+('ALU009', 'CIC002', 'CUR004'),
+('ALU009', 'CIC002', 'CUR005'),
+
+('ALU010', 'CIC002', 'CUR002'),
+('ALU010', 'CIC002', 'CUR004'),
+('ALU010', 'CIC002', 'CUR005'),
+
+-- CIC003: CUR001, CUR005, CUR006
+('ALU011', 'CIC003', 'CUR001'),
+('ALU011', 'CIC003', 'CUR005'),
+
+('ALU012', 'CIC003', 'CUR001'),
+('ALU012', 'CIC003', 'CUR006'),
+
+('ALU013', 'CIC003', 'CUR005'),
+('ALU013', 'CIC003', 'CUR006'),
+
+('ALU014', 'CIC003', 'CUR001'),
+('ALU014', 'CIC003', 'CUR005'),
+
+('ALU015', 'CIC003', 'CUR001'),
+('ALU015', 'CIC003', 'CUR006');
+
+-- ============================================
+-- SIMULACRO (3 registros)
+-- ============================================
+INSERT INTO SIMULACRO (Id_SIMULACRO, Nombre_simulacro, Fecha) VALUES
+('SIM001', 'Simulacro General 1', '2025-04-15'),
+('SIM002', 'Simulacro General 2', '2025-06-20'),
+('SIM003', 'Simulacro Especial',  '2025-09-10');
+
+-- ============================================
+-- SIMULACRO_ALUMNO (30 registros: 15 alumnos x 2 simulacros)
+-- ============================================
+INSERT INTO SIMULACRO_ALUMNO (Id_SIMULACRO, Id_ALUMNO, Nota) VALUES
+-- SIM001
+('SIM001', 'ALU001', 15.50),
+('SIM001', 'ALU002', 14.20),
+('SIM001', 'ALU003', 13.80),
+('SIM001', 'ALU004', 16.10),
+('SIM001', 'ALU005', 12.75),
+('SIM001', 'ALU006', 17.40),
+('SIM001', 'ALU007', 18.00),
+('SIM001', 'ALU008', 14.90),
+('SIM001', 'ALU009', 16.80),
+('SIM001', 'ALU010', 13.50),
+('SIM001', 'ALU011', 19.00),
+('SIM001', 'ALU012', 18.30),
+('SIM001', 'ALU013', 17.20),
+('SIM001', 'ALU014', 16.40),
+('SIM001', 'ALU015', 15.10),
+
+-- SIM002
+('SIM002', 'ALU001', 16.00),
+('SIM002', 'ALU002', 14.80),
+('SIM002', 'ALU003', 14.10),
+('SIM002', 'ALU004', 16.90),
+('SIM002', 'ALU005', 13.20),
+('SIM002', 'ALU006', 17.80),
+('SIM002', 'ALU007', 18.20),
+('SIM002', 'ALU008', 15.30),
+('SIM002', 'ALU009', 17.10),
+('SIM002', 'ALU010', 13.90),
+('SIM002', 'ALU011', 19.20),
+('SIM002', 'ALU012', 18.50),
+('SIM002', 'ALU013', 17.60),
+('SIM002', 'ALU014', 16.70),
+('SIM002', 'ALU015', 15.50);
+
+-- ============================================
+-- HORARIO_CURSO (15 registros)
+-- Recuerda que Dia_semana debe estar dentro de:
+-- ('lunes','martes','miércoles','jueves','viernes')
+-- ============================================
+INSERT INTO HORARIO_CURSO (Id_HORARIO, Id_CICLO, Id_CURSO, Dia_semana, Hora_inicio, Hora_fin) VALUES
+-- CIC001 - CUR001
+('HOR001', 'CIC001', 'CUR001', 'lunes',     '08:00', '10:00'),
+('HOR002', 'CIC001', 'CUR001', 'miércoles', '08:00', '10:00'),
+-- CIC001 - CUR002
+('HOR003', 'CIC001', 'CUR002', 'martes',    '10:00', '12:00'),
+('HOR004', 'CIC001', 'CUR002', 'jueves',    '10:00', '12:00'),
+-- CIC001 - CUR003
+('HOR005', 'CIC001', 'CUR003', 'viernes',   '08:00', '10:00'),
+
+-- CIC002 - CUR002
+('HOR006', 'CIC002', 'CUR002', 'lunes',     '10:00', '12:00'),
+('HOR007', 'CIC002', 'CUR002', 'miércoles', '10:00', '12:00'),
+-- CIC002 - CUR004
+('HOR008', 'CIC002', 'CUR004', 'martes',    '08:00', '10:00'),
+('HOR009', 'CIC002', 'CUR004', 'jueves',    '08:00', '10:00'),
+-- CIC002 - CUR005
+('HOR010', 'CIC002', 'CUR005', 'viernes',   '10:00', '12:00'),
+
+-- CIC003 - CUR001
+('HOR011', 'CIC003', 'CUR001', 'lunes',     '08:00', '10:00'),
+-- CIC003 - CUR005
+('HOR012', 'CIC003', 'CUR005', 'martes',    '09:00', '11:00'),
+-- CIC003 - CUR006
+('HOR013', 'CIC003', 'CUR006', 'miércoles', '11:00', '13:00'),
+('HOR014', 'CIC003', 'CUR006', 'jueves',    '11:00', '13:00'),
+('HOR015', 'CIC003', 'CUR006', 'viernes',   '09:00', '11:00');
+
+-- ============================================
+-- ASISTENCIA (50 registros)
+-- OJO: id_asistencia es IDENTITY -> NO lo incluimos en el INSERT
+-- Unique(Id_ALUMNO, Id_CICLO, Fecha)
+-- ============================================
+INSERT INTO ASISTENCIA (Id_ALUMNO, Id_CICLO, Fecha, Estado_asistencia) VALUES
+-- CIC001 (ALU001-ALU005) del 2025-04-01 al 2025-04-05
+('ALU001', 'CIC001', '2025-04-01', 'asistio'),
+('ALU001', 'CIC001', '2025-04-02', 'asistio'),
+('ALU001', 'CIC001', '2025-04-03', 'tardanza'),
+('ALU001', 'CIC001', '2025-04-04', 'falto'),
+('ALU001', 'CIC001', '2025-04-05', 'asistio'),
+
+('ALU002', 'CIC001', '2025-04-01', 'asistio'),
+('ALU002', 'CIC001', '2025-04-02', 'tardanza'),
+('ALU002', 'CIC001', '2025-04-03', 'asistio'),
+('ALU002', 'CIC001', '2025-04-04', 'asistio'),
+('ALU002', 'CIC001', '2025-04-05', 'falto'),
+
+('ALU003', 'CIC001', '2025-04-01', 'falto'),
+('ALU003', 'CIC001', '2025-04-02', 'asistio'),
+('ALU003', 'CIC001', '2025-04-03', 'asistio'),
+('ALU003', 'CIC001', '2025-04-04', 'tardanza'),
+('ALU003', 'CIC001', '2025-04-05', 'asistio'),
+
+('ALU004', 'CIC001', '2025-04-01', 'asistio'),
+('ALU004', 'CIC001', '2025-04-02', 'asistio'),
+('ALU004', 'CIC001', '2025-04-03', 'asistio'),
+('ALU004', 'CIC001', '2025-04-04', 'tardanza'),
+('ALU004', 'CIC001', '2025-04-05', 'asistio'),
+
+('ALU005', 'CIC001', '2025-04-01', 'asistio'),
+('ALU005', 'CIC001', '2025-04-02', 'falto'),
+('ALU005', 'CIC001', '2025-04-03', 'asistio'),
+('ALU005', 'CIC001', '2025-04-04', 'asistio'),
+('ALU005', 'CIC001', '2025-04-05', 'asistio'),
+
+-- CIC002 (ALU006-ALU010) del 2025-09-01 al 2025-09-05
+('ALU006', 'CIC002', '2025-09-01', 'asistio'),
+('ALU006', 'CIC002', '2025-09-02', 'asistio'),
+('ALU006', 'CIC002', '2025-09-03', 'asistio'),
+('ALU006', 'CIC002', '2025-09-04', 'tardanza'),
+('ALU006', 'CIC002', '2025-09-05', 'asistio'),
+
+('ALU007', 'CIC002', '2025-09-01', 'tardanza'),
+('ALU007', 'CIC002', '2025-09-02', 'asistio'),
+('ALU007', 'CIC002', '2025-09-03', 'falto'),
+('ALU007', 'CIC002', '2025-09-04', 'asistio'),
+('ALU007', 'CIC002', '2025-09-05', 'asistio'),
+
+('ALU008', 'CIC002', '2025-09-01', 'asistio'),
+('ALU008', 'CIC002', '2025-09-02', 'asistio'),
+('ALU008', 'CIC002', '2025-09-03', 'tardanza'),
+('ALU008', 'CIC002', '2025-09-04', 'asistio'),
+('ALU008', 'CIC002', '2025-09-05', 'asistio'),
+
+('ALU009', 'CIC002', '2025-09-01', 'asistio'),
+('ALU009', 'CIC002', '2025-09-02', 'falto'),
+('ALU009', 'CIC002', '2025-09-03', 'asistio'),
+('ALU009', 'CIC002', '2025-09-04', 'asistio'),
+('ALU009', 'CIC002', '2025-09-05', 'tardanza'),
+
+('ALU010', 'CIC002', '2025-09-01', 'asistio'),
+('ALU010', 'CIC002', '2025-09-02', 'asistio'),
+('ALU010', 'CIC002', '2025-09-03', 'asistio'),
+('ALU010', 'CIC002', '2025-09-04', 'asistio'),
+('ALU010', 'CIC002', '2025-09-05', 'asistio');

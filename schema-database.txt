@@ -1,0 +1,157 @@
+-- 2. Crear tabla USUARIO
+CREATE TABLE usuario (
+    id_usuario INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    codigo_usuario VARCHAR(50) UNIQUE NOT NULL,
+    contrasena_usuario VARCHAR(150) NOT NULL,
+    rol VARCHAR(20) NOT NULL,
+    CONSTRAINT chk_rol CHECK (rol IN ('docente', 'alumno', 'tutor'))
+);
+
+-- 3. Crear tabla APODERADO
+CREATE TABLE apoderado (
+    id_apoderado INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nombre_apoderado VARCHAR(100),
+    telefono VARCHAR(9),
+    parentesco VARCHAR(50)
+);
+
+-- 4. Crear tabla TUTOR
+CREATE TABLE tutor (
+    id_tutor INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nombre_tutor VARCHAR(100),
+    dni CHAR(8),
+    fecha_nacimiento DATE,
+    telefono VARCHAR(9),
+    correo_electronico VARCHAR(100),
+    id_usuario INTEGER,
+    CONSTRAINT fk_tutor_usuario
+        FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+);
+
+-- 5. Crear tabla ALUMNO
+CREATE TABLE alumno (
+    id_alumno INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nombre_alumno VARCHAR(100),
+    dni CHAR(8),
+    fecha_nacimiento DATE,
+    telefono VARCHAR(9),
+    direccion VARCHAR(150),
+    correo_electronico VARCHAR(100),
+    nivel_educativo VARCHAR(50),
+    id_apoderado INTEGER NOT NULL,
+    id_usuario INTEGER NOT NULL,
+    id_tutor INTEGER NOT NULL,
+    CONSTRAINT fk_alumno_apoderado
+        FOREIGN KEY (id_apoderado) REFERENCES apoderado(id_apoderado),
+    CONSTRAINT fk_alumno_usuario
+        FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+    CONSTRAINT fk_alumno_tutor
+        FOREIGN KEY (id_tutor) REFERENCES tutor(id_tutor)
+);
+
+-- 6. Crear tabla DOCENTE
+CREATE TABLE docente (
+    id_docente INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nombre_docente VARCHAR(100),
+    dni CHAR(8),
+    fecha_nacimiento DATE,
+    telefono VARCHAR(9),
+    correo_electronico VARCHAR(100),
+    id_usuario INTEGER,
+    CONSTRAINT fk_docente_usuario
+        FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+);
+
+-- 7. Crear tabla CICLO
+CREATE TABLE ciclo (
+    id_ciclo INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nombre_ciclo VARCHAR(50),
+    fecha_inicio DATE,
+    fecha_fin DATE,
+    id_tutor INTEGER,
+    CONSTRAINT fk_ciclo_tutor
+        FOREIGN KEY (id_tutor) REFERENCES tutor(id_tutor)
+);
+
+-- 8. Crear tabla CURSO
+CREATE TABLE curso (
+    id_curso INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nombre_curso VARCHAR(100),
+    horas_de_clase VARCHAR(20)
+);
+
+-- 9. Crear tabla CICLO_CURSO
+CREATE TABLE ciclo_curso (
+    id_ciclo INTEGER,
+    id_curso INTEGER,
+    id_docente INTEGER,
+    PRIMARY KEY (id_ciclo, id_curso),
+    CONSTRAINT fk_ciclo_curso_ciclo
+        FOREIGN KEY (id_ciclo) REFERENCES ciclo(id_ciclo),
+    CONSTRAINT fk_ciclo_curso_curso
+        FOREIGN KEY (id_curso) REFERENCES curso(id_curso),
+    CONSTRAINT fk_ciclo_curso_docente
+        FOREIGN KEY (id_docente) REFERENCES docente(id_docente)
+);
+
+-- 10. Crear tabla ALUMNO_CICLO_CURSO
+CREATE TABLE alumno_ciclo_curso (
+    id_alumno INTEGER,
+    id_ciclo INTEGER,
+    id_curso INTEGER,
+    PRIMARY KEY (id_alumno, id_ciclo, id_curso),
+    CONSTRAINT fk_acc_alumno
+        FOREIGN KEY (id_alumno) REFERENCES alumno(id_alumno),
+    CONSTRAINT fk_acc_ciclo
+        FOREIGN KEY (id_ciclo) REFERENCES ciclo(id_ciclo),
+    CONSTRAINT fk_acc_curso
+        FOREIGN KEY (id_curso) REFERENCES curso(id_curso)
+);
+
+-- 11. Crear tabla SIMULACRO
+CREATE TABLE simulacro (
+    id_simulacro INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    nombre_simulacro VARCHAR(100),
+    fecha DATE
+);
+
+-- 12. Crear tabla SIMULACRO_ALUMNO
+CREATE TABLE simulacro_alumno (
+    id_simulacro INTEGER,
+    id_alumno INTEGER,
+    nota NUMERIC(6,2),
+    PRIMARY KEY (id_simulacro, id_alumno),
+    CONSTRAINT fk_sa_simulacro
+        FOREIGN KEY (id_simulacro) REFERENCES simulacro(id_simulacro),
+    CONSTRAINT fk_sa_alumno
+        FOREIGN KEY (id_alumno) REFERENCES alumno(id_alumno)
+);
+
+-- 13. Crear tabla HORARIO_CURSO
+CREATE TABLE horario_curso (
+    id_horario INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id_ciclo INTEGER,
+    id_curso INTEGER,
+    dia_semana VARCHAR(15),
+    hora_inicio TIME,
+    hora_fin TIME,
+    CONSTRAINT chk_dia CHECK (dia_semana IN ('lunes', 'martes', 'miércoles', 'jueves', 'viernes')),
+    CONSTRAINT fk_horario_ciclo_curso
+        FOREIGN KEY (id_ciclo, id_curso) REFERENCES ciclo_curso(id_ciclo, id_curso)
+);
+
+-- 14. Crear tabla ASISTENCIA
+CREATE TABLE asistencia (
+    id_asistencia INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id_alumno VARCHAR(15) NOT NULL,
+    id_ciclo  VARCHAR(15) NOT NULL,
+    fecha DATE NOT NULL,
+    estado_asistencia VARCHAR(10) NOT NULL,
+    CONSTRAINT chk_estado CHECK (estado_asistencia IN ('asistio', 'falto', 'tardanza')),
+    CONSTRAINT fk_asistencia_alumno
+        FOREIGN KEY (id_alumno) REFERENCES alumno(id_alumno),
+    CONSTRAINT fk_asistencia_ciclo
+        FOREIGN KEY (id_ciclo) REFERENCES ciclo(id_ciclo),
+    CONSTRAINT uq_asistencia UNIQUE (id_alumno, id_ciclo, fecha)
+);
+

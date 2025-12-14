@@ -1,0 +1,74 @@
+# Documentación de Endpoints de la API
+
+## Autenticación
+- **Endpoint:** `/api/login/`
+- **Método:** `POST`
+- **Descripción:** Autentica a un usuario (alumno, docente o tutor) y devuelve un token de acceso y los datos del usuario.
+- **Payload (Body):**
+  ```json
+  {
+    "username": "...",
+    "password": "...",
+    "role": "..."
+  }
+  ```
+
+------------------------------------------------------------
+
+## Endpoints de Alumno
+
+- **Endpoint:** `/api/alumno/<str:codigo_usuario>/datos/`
+- **Método:** `GET`
+- **Descripción:** Obtiene los datos personales de un alumno específico.
+
+- **Endpoint:** `/api/alumno/<str:codigo_usuario>/cursos/`
+- **Método:** `GET`
+- **Descripción:** Obtiene la lista de cursos en los que está matriculado un alumno, incluyendo horario y docente.
+
+- **Endpoint:** `/api/alumno/<str:codigo_usuario>/ciclo/<int:id_ciclo>/notas/`
+- **Método:** `GET`
+- **Descripción:** Obtiene las notas de los simulacros de un alumno en un ciclo específico.
+
+- **Endpoint:** `/api/alumno/<str:codigo_usuario>/proximo-simulacro/`
+- **Método:** `GET`
+- **Descripción:** Obtiene información sobre el próximo simulacro programado para el alumno.
+
+- **Endpoint:** `/api/alumno/<str:codigo_usuario>/asistencia/`
+- **Método:** `GET`
+- **Descripción:** Obtiene el porcentaje de asistencia de un alumno.
+
+---
+
+## Endpoints de Docente
+
+- **Endpoint:** `/api/docente/<str:codigo_usuario>/datos/`
+- **Método:** `GET`
+- **Descripción:** Obtiene los datos personales de un docente específico.
+
+- **Endpoint:** `/api/docente/<str:codigo_usuario>/cursos/`
+- **Método:** `GET`
+- **Descripción:** Obtiene la lista de cursos que imparte un docente, incluyendo horario y número de alumnos.
+
+---
+
+## Endpoints de Tutor
+
+- **Endpoint:** `/api/tutor/<str:codigo_usuario>/datos/`
+- **Método:** `GET`
+- **Descripción:** Obtiene los datos personales de un tutor específico.
+
+- **Endpoint:** `/api/tutor/<str:codigo_usuario>/ciclos/`
+- **Método:** `GET`
+- **Descripción:** Obtiene la lista de ciclos a cargo de un tutor, con el número de alumnos en cada uno.
+
+- **Endpoint:** `/api/tutor/<str:codigo_usuario>/ciclo/<int:id_ciclo>/simulacros/`
+- **Método:** `GET`
+- **Descripción:** Obtiene los simulacros de un ciclo específico de un tutor.
+
+- **Endpoint:** `/api/tutor/<str:codigo_usuario>/ciclo/<int:id_ciclo>/alumnos/`
+- **Método:** `GET`
+- **Descripción:** Obtiene la lista de alumnos en un ciclo específico a cargo de un tutor.
+
+- **Endpoint:** `/api/tutor/<str:codigo_usuario>/ciclo/<int:id_ciclo>/alumno/<int:id_alumno>/`
+- **Método:** `GET`
+- **Descripción:** Obtiene la información detallada de un alumno específico dentro de un ciclo de un tutor.
