@@ -7,47 +7,80 @@ from django.db import connection
 from django.utils import timezone
 
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import *
+from .serializers import *
+from django.db import connection
+from django.utils import timezone
+from rest_framework_simplejwt.tokens import RefreshToken
+
+# WARNING: This project stores passwords in plain text, which is a major security risk.
+# It is highly recommended to migrate to Django's built-in authentication system
+# which securely hashes and salts passwords.
+
+def get_tokens_for_user(user):
+    refresh = RefreshToken.for_user(user)
+    return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+    }
+
 class LoginView(APIView):
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
         role = request.data.get('role')
 
+        # SECURITY WARNING: Plain text password check. This is insecure.
         try:
             usuario = Usuario.objects.get(codigo_usuario=username, contrasena_usuario=password, rol=role)
+            
+            user_data = None
             if role == 'alumno':
-                alumno = Alumno.objects.get(id_usuario=usuario)
-                user_data = {
-                    'id': alumno.id_alumno,
-                    'nombre': alumno.nombre_alumno,
-                    'role': usuario.rol
-                }
+                try:
+                    alumno = Alumno.objects.get(id_usuario=usuario)
+                    user_data = {
+                        'id': alumno.id_alumno,
+                        'nombre': alumno.nombre_alumno,
+                        'role': usuario.rol
+                    }
+                except Alumno.DoesNotExist:
+                    return Response({'error': 'Perfil de alumno no encontrado para este usuario.'}, status=status.HTTP_404_NOT_FOUND)
             elif role == 'docente':
-                docente = Docente.objects.get(id_usuario=usuario)
-                user_data = {
-                    'id': docente.id_docente,
-                    'nombre': docente.nombre_docente,
-                    'role': usuario.rol
-                }
+                try:
+                    docente = Docente.objects.get(id_usuario=usuario)
+                    user_data = {
+                        'id': docente.id_docente,
+                        'nombre': docente.nombre_docente,
+                        'role': usuario.rol
+                    }
+                except Docente.DoesNotExist:
+                    return Response({'error': 'Perfil de docente no encontrado para este usuario.'}, status=status.HTTP_404_NOT_FOUND)
             elif role == 'tutor':
-                tutor = Tutor.objects.get(id_usuario=usuario)
-                user_data = {
-                    'id': tutor.id_tutor,
-                    'nombre': tutor.nombre_tutor,
-                    'role': usuario.rol
-                }
+                try:
+                    tutor = Tutor.objects.get(id_usuario=usuario)
+                    user_data = {
+                        'id': tutor.id_tutor,
+                        'nombre': tutor.nombre_tutor,
+                        'role': usuario.rol
+                    }
+                except Tutor.DoesNotExist:
+                    return Response({'error': 'Perfil de tutor no encontrado para este usuario.'}, status=status.HTTP_404_NOT_FOUND)
             else:
                 return Response({'error': 'Rol no válido'}, status=status.HTTP_400_BAD_REQUEST)
 
+            tokens = get_tokens_for_user(usuario)
             return Response({
-                'token': 'abcdef123...',  # Placeholder
+                'access': tokens['access'],
+                'refresh': tokens['refresh'],
                 'user': user_data
             }, status=status.HTTP_200_OK)
 
         except Usuario.DoesNotExist:
             return Response({'error': 'Credenciales inválidas'}, status=status.HTTP_401_UNAUTHORIZED)
-        except (Alumno.DoesNotExist, Docente.DoesNotExist, Tutor.DoesNotExist):
-            return Response({'error': 'Usuario no encontrado para el rol especificado'}, status=status.HTTP_404_NOT_FOUND)
+
 
 class AlumnoDatosView(APIView):
     def get(self, request, codigo_usuario):

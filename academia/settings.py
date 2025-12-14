@@ -28,7 +28,32 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'myapp',
+    'drf_spectacular',
+    'rest_framework_simplejwt',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Academia API',
+    'DESCRIPTION': 'API para el sistema de gestión académica',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'USER_ID_FIELD': 'id_usuario',
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

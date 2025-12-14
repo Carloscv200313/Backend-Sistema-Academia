@@ -1,10 +1,14 @@
 from django.db import models
 
 class Usuario(models.Model):
-    id_usuario = models.CharField(primary_key=True)
+    id_usuario = models.CharField(primary_key=True, max_length=255)
     codigo_usuario = models.CharField(max_length=50, unique=True)
     contrasena_usuario = models.CharField(max_length=150)
     rol = models.CharField(max_length=20)
+
+    @property
+    def pk(self):
+        return self.id_usuario
 
     class Meta:
         db_table = 'usuario'
